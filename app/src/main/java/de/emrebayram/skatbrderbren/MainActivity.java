@@ -10,9 +10,14 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+import de.emrebayram.skatbrderbren.model.Player;
+
+public class MainActivity extends AppCompatActivity implements CreateGameDialog.GameStartListener {
 
     private static final String TAG_CREATE_GAME_DIALOG = "create_game_dialog";
+    private ArrayList<Player> mPlayers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,5 +57,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onGameCreated(ArrayList<Player> players) {
+        // TODO init the game
+        mPlayers = players;
     }
 }

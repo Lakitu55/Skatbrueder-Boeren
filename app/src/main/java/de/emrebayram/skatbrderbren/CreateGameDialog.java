@@ -1,6 +1,8 @@
 package de.emrebayram.skatbrderbren;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -24,6 +26,7 @@ public class CreateGameDialog extends DialogFragment {
 
     private ArrayList<Player> mPlayers;
     private AlertDialog mAlertDialog;
+    private GameStartListener mGameStartListener;
 
     public CreateGameDialog() {
         // init fields
@@ -43,25 +46,24 @@ public class CreateGameDialog extends DialogFragment {
         (content.findViewById(R.id.btn_start)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO create player and add them to the list. Notify the mainactivity to start a game.
+                // create player and add them to the list. Notify the mainactivity to start a game.
                 EditText etPlayer1 = mAlertDialog.findViewById(R.id.et_player1);
                 EditText etPlayer2 = mAlertDialog.findViewById(R.id.et_player2);
                 EditText etPlayer3 = mAlertDialog.findViewById(R.id.et_player3);
                 if (etPlayer1 != null && etPlayer2 != null && etPlayer3 != null) {
                     if (etPlayer1.getText().toString().isEmpty()) {
-                        // TODO show error that player 1 must have a name
                         etPlayer1.setError(getString(R.string.error_player1_no_name));
                     } else if (etPlayer2.getText().toString().isEmpty()) {
-                        // TODO show error that player 2 must have a name
                         etPlayer2.setError(getString(R.string.error_player2_no_name));
                     } else if (etPlayer3.getText().toString().isEmpty()) {
-                        // TODO show error that player 3 must have a name
                         etPlayer3.setError(getString(R.string.error_player3_no_name));
                     } else {
                         // all players have a name, create them now and notifiy main activty
                         mPlayers.add(new Player(etPlayer1.getText().toString()));
                         mPlayers.add(new Player(etPlayer2.getText().toString()));
                         mPlayers.add(new Player(etPlayer3.getText().toString()));
+                        mGameStartListener.onGameCreated(mPlayers);
+                        CreateGameDialog.this.dismiss();
                     }
                 } else {
                     // TODO show error, that something went wrong
@@ -81,5 +83,23 @@ public class CreateGameDialog extends DialogFragment {
         // keep a reference so that the dialog can be dismissed in the click clistener
         mAlertDialog = builder.create();
         return mAlertDialog;
+    }
+
+    public interface GameStartListener {
+        public void onGameCreated(ArrayList<Player> players);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        // Verify that the host activity implements the callback interface
+        try {
+            // Instantiate the NoticeDialogListener so we can send events to the host
+            mGameStartListener = (GameStartListener) context;
+        } catch (ClassCastException e) {
+            // The activity doesn't implement the interface, throw exception
+            throw new ClassCastException(context.toString()
+                    + " must implement GameStartListener");
+        }
     }
 }
