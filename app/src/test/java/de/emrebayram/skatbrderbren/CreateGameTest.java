@@ -1,12 +1,9 @@
 package de.emrebayram.skatbrderbren;
 
-import org.hamcrest.core.Is;
-import org.junit.Assert;
 import org.junit.Test;
 
 import de.emrebayram.skatbrderbren.model.Game;
 import de.emrebayram.skatbrderbren.model.Player;
-
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
