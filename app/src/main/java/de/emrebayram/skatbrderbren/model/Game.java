@@ -12,12 +12,48 @@ public class Game {
     private int mScoreToWin;
 
     /**
-     * Constructor for creating a game. Pass players and the scrore to win.
-     * @param players an {@link ArrayList} containing the players
+     * Simple getter method for returning the score to win of this game
+     * @return the score to win as int
+     */
+    public int getScoreToWin() {
+        return mScoreToWin;
+    }
+
+    /**
+     * Setter method for setting the score to win of this game
+     * @param scoreToWin the score to win of this game
+     */
+    public void setScoreToWin(int scoreToWin) {
+        this.mScoreToWin = scoreToWin;
+    }
+
+    /**
+     * Constructor for creating a game. Requires the scrore to win.
      * @param scoreToWin an int containing the score to win
      */
-    public Game(ArrayList<Player> players, int scoreToWin) {
-        this.mPlayers = players;
+    public Game(int scoreToWin) {
+        this.mPlayers = new ArrayList<>();
         this.mScoreToWin = scoreToWin;
+
+    }
+
+    /**
+     * Method to add a new player. The player will be added to an array list.
+     * @param newPlayer a new {@link Player} to add the game
+     */
+    public void addPlayer(Player newPlayer) {
+        mPlayers.add(newPlayer);
+    }
+
+    /**
+     * Method to remove a player from the game. The player will be removed from the array list,
+     * therefore the player must exist in the array. Will return true if the player could be removed
+     * , false otherwise
+     * @param player a new {@link Player} to add the game
+     * @return true, if the passed player was found in in the array list and could be removed,
+     * otherwise false
+     */
+    public boolean removePlayer(Player player) {
+        return mPlayers.remove(player);
     }
 }

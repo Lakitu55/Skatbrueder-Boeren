@@ -16,6 +16,7 @@ import android.widget.NumberPicker;
 
 import java.util.ArrayList;
 
+import de.emrebayram.skatbrderbren.model.Game;
 import de.emrebayram.skatbrderbren.model.Player;
 
 /**
@@ -24,14 +25,8 @@ import de.emrebayram.skatbrderbren.model.Player;
 
 public class CreateGameDialog extends DialogFragment {
 
-    private ArrayList<Player> mPlayers;
     private AlertDialog mAlertDialog;
     private GameStartListener mGameStartListener;
-
-    public CreateGameDialog() {
-        // init fields
-        mPlayers = new ArrayList<Player>();
-    }
 
     @NonNull
     @Override
@@ -59,10 +54,11 @@ public class CreateGameDialog extends DialogFragment {
                         etPlayer3.setError(getString(R.string.error_player3_no_name));
                     } else {
                         // all players have a name, create them now and notifiy main activty
-                        mPlayers.add(new Player(etPlayer1.getText().toString()));
-                        mPlayers.add(new Player(etPlayer2.getText().toString()));
-                        mPlayers.add(new Player(etPlayer3.getText().toString()));
-                        mGameStartListener.onGameCreated(mPlayers);
+                        Game game = new Game(501);
+                        game.addPlayer(new Player(etPlayer1.getText().toString()));
+                        game.addPlayer(new Player(etPlayer2.getText().toString()));
+                        game.addPlayer(new Player(etPlayer3.getText().toString()));
+                        mGameStartListener.onGameCreated(game);
                         CreateGameDialog.this.dismiss();
                     }
                 } else {
@@ -86,7 +82,7 @@ public class CreateGameDialog extends DialogFragment {
     }
 
     public interface GameStartListener {
-        public void onGameCreated(ArrayList<Player> players);
+        public void onGameCreated(Game game);
     }
 
     @Override
