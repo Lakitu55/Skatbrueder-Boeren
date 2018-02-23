@@ -1,20 +1,16 @@
 package de.emrebayram.skatbrderbren;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.NumberPicker;
-
-import java.util.ArrayList;
+import android.widget.Spinner;
 
 import de.emrebayram.skatbrderbren.model.Game;
 import de.emrebayram.skatbrderbren.model.Player;
@@ -38,6 +34,15 @@ public class CreateGameDialog extends DialogFragment {
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
         final View content = inflater.inflate(R.layout.dialog_create_game, null);
+
+        // init views
+        Spinner spinner = (Spinner) content.findViewById(R.id.sp_scoreToWin);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getContext(),
+                        R.array.scoreToWin, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        // replace the clicklistener of the dialog
         (content.findViewById(R.id.btn_start)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,7 +67,7 @@ public class CreateGameDialog extends DialogFragment {
                         CreateGameDialog.this.dismiss();
                     }
                 } else {
-                    // TODO show error, that something went wrong
+                    // TODO show error via Snackbar, that something went wrong
                 }
             }
         });
