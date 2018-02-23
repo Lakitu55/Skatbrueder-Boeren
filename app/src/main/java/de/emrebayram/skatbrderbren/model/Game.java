@@ -56,4 +56,12 @@ public class Game {
     public boolean removePlayer(Player player) {
         return mPlayers.remove(player);
     }
+
+    /**
+     * Getter method for the count of players.
+     * @return return the count of the players from the players array
+     */
+    public int getPlayerCount() {
+        return mPlayers.size();
+    }
 }
