@@ -12,12 +12,13 @@ import android.view.MenuItem;
 
 import java.util.ArrayList;
 
+import de.emrebayram.skatbrderbren.model.Game;
 import de.emrebayram.skatbrderbren.model.Player;
 
 public class MainActivity extends AppCompatActivity implements CreateGameDialog.GameStartListener {
 
     private static final String TAG_CREATE_GAME_DIALOG = "create_game_dialog";
-    private ArrayList<Player> mPlayers;
+    private Game mGame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +61,7 @@ public class MainActivity extends AppCompatActivity implements CreateGameDialog.
     }
 
     @Override
-    public void onGameCreated(ArrayList<Player> players) {
-        // TODO init the game
-        mPlayers = players;
+    public void onGameCreated(Game game) {
+        mGame = game;
     }
 }
