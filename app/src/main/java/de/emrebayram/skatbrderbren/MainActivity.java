@@ -10,9 +10,16 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+import de.emrebayram.skatbrderbren.dummy.DummyContent;
+import de.emrebayram.skatbrderbren.model.Game;
+import de.emrebayram.skatbrderbren.model.Player;
+
+public class MainActivity extends AppCompatActivity implements CreateGameDialog.GameStartListener, ScoreTableFragment.OnListFragmentInteractionListener {
 
     private static final String TAG_CREATE_GAME_DIALOG = "create_game_dialog";
+    private Game mGame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,5 +59,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onGameCreated(Game game) {
+        mGame = game;
+    }
+
+
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+
     }
 }
