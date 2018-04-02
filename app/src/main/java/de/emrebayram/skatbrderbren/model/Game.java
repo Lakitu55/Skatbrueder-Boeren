@@ -10,6 +10,7 @@ public class Game {
 
     private ArrayList<Player> mPlayers;
     private int mScoreToWin;
+    private ArrayList<Round> mRounds;
 
     /**
      * Simple getter method for returning the score to win of this game
@@ -34,7 +35,23 @@ public class Game {
     public Game(int scoreToWin) {
         this.mPlayers = new ArrayList<>();
         this.mScoreToWin = scoreToWin;
+        mRounds = new ArrayList<>();
+    }
 
+    /**
+     * Getter for the played rounds in a game. The rounds are ordered.
+     * @return an arraylist of rounds
+     */
+    public ArrayList<Round> getRounds() {
+        return mRounds;
+    }
+
+    /**
+     * Method to add a round to the game.
+     * @param roundToAdd the played round containing the score.
+     */
+    public void addRound(Round roundToAdd) {
+        mRounds.add(roundToAdd);
     }
 
     /**

@@ -8,8 +8,8 @@ public class Round {
 
     private int mScore;
 
-    public Round() {
-        mScore = 0;
+    public Round(int score) {
+        mScore = score;
     }
 
     public int getScore() {
