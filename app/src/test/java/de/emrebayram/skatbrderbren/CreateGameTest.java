@@ -1,6 +1,6 @@
 package de.emrebayram.skatbrderbren;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.emrebayram.skatbrderbren.model.Game;
 import de.emrebayram.skatbrderbren.model.Player;
@@ -13,7 +13,7 @@ import static org.junit.Assert.assertThat;
  */
 public class CreateGameTest {
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void createGame_AddPlayer_IncreasesCountOfPlayers() {
         Game game = new Game(301);
         int initalCount = game.getPlayerCount();
